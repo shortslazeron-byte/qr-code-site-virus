@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#030604">
+<title>SECURITY BREACH // MOBILE SIMULATION</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+:root{--g:#42ff8b;--r:#ff3544;--dim:#78a887;--bg:#030604}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--g);font-family:'Share Tech Mono',Consolas,monospace}
+body{min-height:100svh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:9;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,0,0,.22) 4px),linear-gradient(90deg,rgba(255,0,0,.025),transparent,rgba(0,255,100,.025))}
+.shell{width:min(100%,520px);min-height:100svh;margin:auto;padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);background:radial-gradient(ellipse at 50% 18%,#102116 0,#030604 55%)}
+header{height:48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #16452b;font-size:11px;letter-spacing:1px}
+.brand{color:#e6ffed}.brand b{color:var(--r)}
+.alert{border:1px solid var(--r);color:var(--r);padding:4px 7px;font-size:10px}
+.hero{text-align:center;padding:27px 4px 20px}
+.skull{font-size:54px;color:var(--r);line-height:1;text-shadow:0 0 20px #f22}
+.kicker{font-size:10px;letter-spacing:2px;color:var(--g);margin-top:13px}
+h1{font-size:clamp(34px,10vw,48px);line-height:1.03;letter-spacing:1px;color:var(--r);text-shadow:2px 0 #76000a,-1px 0 #ff9a9f;margin:13px 0 10px;animation:flicker 3s infinite}
+.subtitle{font-size:clamp(17px,5vw,23px);line-height:1.2;color:#f0f3f0;letter-spacing:1px}
+.progress-wrap{margin:20px auto 9px;width:100%;max-width:390px}
+.progress{height:7px;background:#142219;border:1px solid #28603e}
+.progress span{display:block;width:0;height:100%;background:var(--r);box-shadow:0 0 12px var(--r);transition:width .35s}
+#phase{font-size:11px;color:#9bd9ad;min-height:16px}
+.countbox{margin:15px auto 0;border:1px solid var(--r);padding:11px 8px;max-width:390px;background:#13070988}
+.countbox small{display:block;font-size:10px;color:#ff7d86;letter-spacing:1px}
+#count{font-size:38px;color:var(--r);text-shadow:0 0 15px #f00;margin-top:3px}
+.stack{display:grid;gap:11px;margin-top:6px}
+.panel{border:1px solid #17603a;background:rgba(4,15,9,.78);padding:12px;box-shadow:0 0 16px #00ff3b0b}
+.panel h2{font-size:11px;font-weight:400;color:#b0ffc5;letter-spacing:1px;margin:0 0 9px;padding-bottom:7px;border-bottom:1px solid #16452b}
+.logs{height:145px;overflow:hidden;font-size:11px;line-height:1.65;color:#55ed8b;overflow-wrap:anywhere}
+.logs .warn{color:#ff626b}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{font-size:10px;color:#8dbb9a;line-height:1.6}
+.stat b{display:block;color:var(--r);font-size:12px;font-weight:400}
+.trace{font-size:11px;color:#92cda2;line-height:1.8}
+.footer{text-align:center;padding:18px 5px 24px;color:#668b73;font-size:9px;line-height:1.6;letter-spacing:.7px}
+.reveal{display:none;position:fixed;inset:0;z-index:20;background:rgba(1,4,2,.98);align-items:center;justify-content:center;padding:20px;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.reveal.show{display:flex}
+.reveal-inner{width:min(100%,460px);border:1px solid var(--g);padding:25px 18px;text-align:center;box-shadow:0 0 35px #00ff3b20}
+.reveal h2{font-size:clamp(27px,8vw,38px);color:var(--g);margin:0 0 14px}
+.reveal p{font-size:13px;line-height:1.65;color:#a4c9af}
+button{width:100%;margin-top:12px;background:transparent;border:1px solid var(--g);color:var(--g);font:inherit;font-size:13px;padding:14px;min-height:48px}
+.glitch{animation:glitch .15s steps(2) 5}
+@keyframes flicker{0%,94%,100%{opacity:1}95%{opacity:.45}97%{opacity:.8}}
+@keyframes glitch{0%{transform:translate(0)}25%{transform:translate(4px,-2px);filter:hue-rotate(90deg)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,1px)}}
+@media(min-width:700px){.shell{padding-left:22px;padding-right:22px}.hero{padding-top:38px}.stack{grid-template-columns:1fr 1fr}.logs{height:180px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell" id="main">
+<header><div class="brand">[ <b>!</b> ] SECURITY BREACH</div><div class="alert">● SYSTEM ALERT</div></header>
+<section class="hero" id="hero">
+ <div class="skull">☠</div>
+ <div class="kicker">UNAUTHORIZED ACCESS SIMULATION</div>
+ <h1>ВЫ БЫЛИ<br>ВЗЛОМАНЫ...</h1>
+ <div class="subtitle">ВАС ЖИЗНЬ НИЧЕМУ<br>НЕ УЧИТ!</div>
+ <div class="progress-wrap"><div class="progress"><span id="progress"></span></div></div>
+ <div id="phase">ИНИЦИАЛИЗАЦИЯ СЦЕНАРИЯ...</div>
+ <div class="countbox"><small>ЗАВЕРШЕНИЕ СИМУЛЯЦИИ ЧЕРЕЗ</small><div id="count">00:10</div></div>
+</section>
+<div class="stack">
+ <section class="panel"><h2>[ TERMINAL OUTPUT ]</h2><div class="logs" id="logs"></div></section>
+ <section class="panel"><h2>[ SYSTEM DIAGNOSTICS ]</h2><div class="stats">
+  <div class="stat">CPU LOAD<b>SIMULATED</b></div><div class="stat">MEMORY<b>SIMULATED</b></div>
+  <div class="stat">FIREWALL<b>UNVERIFIED*</b></div><div class="stat">THREAT LEVEL<b>CRITICAL*</b></div>
+ </div><div class="trace" style="margin-top:10px">CONNECTION: DEMO<br>FILE ACCESS: NONE<br>DATA TRANSFER: NONE</div></section>
+ <section class="panel"><h2>[ ACTIVITY MONITOR ]</h2><div class="trace" id="activity">WAITING FOR EVENTS...<br>PROCESS: 0%</div></section>
+ <section class="panel"><h2>[ CONNECTION TRACE ]</h2><div class="trace">ROUTING: SIMULATED<br>PROXY: NOT CHECKED<br>SESSION: DEMO ONLY<br>LOCATION: NOT ACCESSED</div></section>
+</div>
+<div class="footer">NO REAL ACCESS · NO DATA COLLECTION<br>CYBERSECURITY AWARENESS DEMONSTRATION</div>
+</div>
+<div class="reveal" id="reveal"><div class="reveal-inner">
+ <div style="color:var(--r);font-size:11px;letter-spacing:2px;margin-bottom:12px">[ SIMULATION COMPLETE ]</div>
+ <h2>ЭТО БЫЛА ИМИТАЦИЯ.</h2>
+ <p>Ваш телефон или компьютер не взламывали. Сайт не получал доступ к вашим файлам, камере, микрофону или аккаунтам и ничего не собирал.</p>
+ <p>В реальной жизни неизвестные ссылки и сомнительные загрузки могут быть опасны. Проверяйте адрес сайта и не запускайте подозрительные файлы.</p>
+ <button onclick="location.reload()">ПОВТОРИТЬ ДЕМОНСТРАЦИЮ</button>
+</div></div>
+<script>
+const lines=[
+['[+]','Establishing demo session...','ok'],
+['[+]','Loading threat analysis module...','ok'],
+['[!]','Unexpected user action detected','warn'],
+['[+]','Checking browser security indicators...','ok'],
+['[!]','Human factor vulnerability detected','warn'],
+['[+]','Running awareness simulation...','ok'],
+['[+]','Preparing simulated security report...','ok'],
+['[!]','Trust level: NOT RECOMMENDED','warn'],
+['[+]','No files accessed. No data collected.','ok'],
+['[+]','Simulation sequence complete','ok']
+];
+const logs=document.getElementById('logs'),progress=document.getElementById('progress');
+const phase=document.getElementById('phase'),activity=document.getElementById('activity'),hero=document.getElementById('hero');
+let i=0,seconds=10;
+function addLine(){
+ if(i>=lines.length)return;
+ const [prefix,msg,type]=lines[i++];
+ const line=document.createElement('div');line.className=type==='warn'?'warn':'';
+ line.textContent=`[${new Date().toLocaleTimeString('ru-RU')}] ${prefix} ${msg}`;
+ logs.appendChild(line);logs.scrollTop=logs.scrollHeight;
+ progress.style.width=(i/lines.length*100)+'%';
+ phase.textContent=['ПРОВЕРКА СОЕДИНЕНИЯ...','АНАЛИЗ УГРОЗ...','ОБНАРУЖЕНЫ ПОДОЗРИТЕЛЬНЫЕ ДЕЙСТВИЯ...','ФОРМИРОВАНИЕ ОТЧЁТА...'][Math.min(3,Math.floor(i/3))];
+ activity.innerHTML=`EVENTS: ${i}<br>LAST EVENT: ${type==='warn'?'WARNING':'NORMAL'}<br>PROCESS: ${Math.round(i/lines.length*100)}%`;
+ if(i===4||i===8){hero.classList.remove('glitch');void hero.offsetWidth;hero.classList.add('glitch')}
+ setTimeout(addLine,800);
+}
+addLine();
+const timer=setInterval(()=>{seconds--;document.getElementById('count').textContent='00:'+String(Math.max(0,seconds)).padStart(2,'0');if(seconds<=0){clearInterval(timer);document.getElementById('reveal').classList.add('show')}},1000);
+</script>
+</body>
+</html>
